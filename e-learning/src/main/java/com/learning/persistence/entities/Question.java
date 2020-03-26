@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -35,8 +36,11 @@ public class Question extends BaseClass {
 	@OneToMany(mappedBy = "question")
 	private List<Answer> answers = new ArrayList<>();
 	
+	@Column(name = "correct", nullable = false)
 	private Boolean correct;
 	
 	@ManyToMany(mappedBy = "questions")
 	private Set<Test> tests = new HashSet<>();
+	
+	private Long numberOfPoints;
 }

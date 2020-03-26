@@ -1,5 +1,8 @@
 package com.learning.persistence.entities;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -18,26 +22,25 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "answer")
+@Table(name = "course")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Answer extends BaseClass {
+public class Course extends BaseClass {
 
-	@Column(name = "answer", nullable = false)
-	private String answer;
-
-	@Column(name = "correct", nullable = false)
-	private Boolean correct;
-
+	@Column(name = "name", nullable = false, length = 50)
+	private String name;
+	
+	@OneToMany(mappedBy = "course")
+	private List<Test> tests = new ArrayList<>();
+	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "question_id", referencedColumnName = "id")
-	private Question question;
+	@JoinColumn(name = "professor_id", referencedColumnName = "id")
+	private User professor;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
-	@JoinTable(name = "answer_student", joinColumns = { @JoinColumn(name = "id_answer") }, inverseJoinColumns = {
-			@JoinColumn(name = "id_user") })
-	private Set<User> usersThatChoseThisAnswer;
-
+	@JoinTable(name = "course_student", joinColumns = { @JoinColumn(name = "id_course") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_student") })
+	private Set<User> students = new HashSet<>();
 }

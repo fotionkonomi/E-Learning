@@ -1,14 +1,19 @@
 package com.learning.persistence.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -52,10 +57,19 @@ public class User extends BaseClass {
 	private Date dateEdited;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "faculty_id")
 	private Faculty faculty;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "role_id")
 	private Role role;
+	
+	@ManyToMany(mappedBy = "students")
+	private Set<Course> myStudentCourses = new HashSet<>();
+	
+	@OneToMany(mappedBy = "professor")
+	private List<Course> myProfessorCourses = new ArrayList<>();
+
+	@ManyToMany(mappedBy = "usersThatChoseThisAnswer")
+	private Set<Answer> myAnswers = new HashSet<>();
 }
