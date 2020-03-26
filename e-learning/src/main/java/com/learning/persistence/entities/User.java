@@ -52,9 +52,9 @@ public class User extends BaseClass {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateRegistered;
 	
-	@Column(name = "date_edited", nullable = false, columnDefinition = "DATETIME")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateEdited;
+//	@Column(name = "date_edited", nullable = false, columnDefinition = "DATETIME")
+//	@Temporal(TemporalType.TIMESTAMP)
+//	private Date dateEdited;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "faculty_id")

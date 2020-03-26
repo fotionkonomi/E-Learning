@@ -1,13 +1,21 @@
 package com.learning;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.learning.business.service.ServiceTest;
 
 @SpringBootApplication
 public class ELearningApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ELearningApplication.class, args);
+		SpringApplication.run(ELearningApplication.class, args);	}
+
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
 	}
 
 }
