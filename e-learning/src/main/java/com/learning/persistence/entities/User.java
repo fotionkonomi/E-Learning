@@ -23,13 +23,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }) })
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@ToString( exclude = { "myStudentCourses", "myProfessorCourses", "myAnswers"  } )
+@EqualsAndHashCode(callSuper = true, exclude = { "myStudentCourses", "myProfessorCourses", "myAnswers"  })
 public class User extends BaseClass {
 
 	@Column(name = "first_name", nullable = false, length = 50)
@@ -40,8 +42,11 @@ public class User extends BaseClass {
 
 	@Column(name = "username", length = 50, nullable = false)
 	private String username;
+	
+	@Column(name = "email", length = 100, nullable = false)
+	private String email;
 
-	@Column(name = "password")
+	@Column(name = "password", nullable = false, length = 255)
 	private String password;
 
 	@Column(name = "date_of_birth", nullable = false, columnDefinition = "DATETIME")

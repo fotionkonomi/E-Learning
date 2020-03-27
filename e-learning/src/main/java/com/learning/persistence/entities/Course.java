@@ -20,16 +20,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "course")
 @Data
+@ToString( exclude = { "tests", "students" } )
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = { "tests", "students" })
 public class Course extends BaseClass {
 
-	@Column(name = "name", nullable = false, length = 50)
+	@Column(name = "name_course", nullable = false, length = 100)
 	private String name;
 	
 	@OneToMany(mappedBy = "course")

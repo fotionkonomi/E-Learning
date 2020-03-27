@@ -17,16 +17,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "test")
 @Data
+@ToString( exclude = { "questions" } )
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = { "questions" })
 public class Test extends BaseClass {
 
-	@Column(name = "name", nullable = false, length = 50)
+	@Column(name = "name_test", nullable = false, length = 50)
 	private String name;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })

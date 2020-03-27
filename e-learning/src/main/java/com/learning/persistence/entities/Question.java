@@ -19,15 +19,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "question")
 @Data
+@ToString( exclude = { "answers", "tests" } )
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true , exclude = { "answers", "tests" })
 public class Question extends BaseClass {
 
+	@Column(name = "question", nullable = false, columnDefinition = "TEXT", length = 65535)
 	private String question;
 	
 	@Enumerated(EnumType.ORDINAL)
@@ -36,7 +39,7 @@ public class Question extends BaseClass {
 	@OneToMany(mappedBy = "question")
 	private List<Answer> answers = new ArrayList<>();
 	
-	@Column(name = "correct", nullable = false)
+	@Column(name = "correct")
 	private Boolean correct;
 	
 	@ManyToMany(mappedBy = "questions")
