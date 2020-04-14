@@ -8,6 +8,6 @@ public class ControllerTest {
 
 	@RequestMapping
 	public String page() {
-		return "index.jsp";
+		return "index";
 	}
 }
