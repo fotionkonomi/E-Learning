@@ -2,10 +2,10 @@ package com.learning.be.business.service;
 
 import java.util.Optional;
 
-public interface BaseService<T, ID> {
+public interface BaseService<DTO, ID> {
 	
-	Optional<T> findById(ID id);
+	Optional<DTO> findById(ID id);
 	
-	T save(T t);
+	DTO save(DTO dto);
 	
 }

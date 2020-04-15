@@ -26,7 +26,7 @@ public class University extends BaseClass {
 	@Column(name = "name_university", nullable = false, length = 100)
 	private String name;
 	
-	@Column(name = "name", nullable = false, columnDefinition = "TEXT", length = 65535)
+	@Column(name = "address", nullable = false, columnDefinition = "TEXT", length = 65535)
 	private String address;
 	
 	@OneToMany(mappedBy = "university")

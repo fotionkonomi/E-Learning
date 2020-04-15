@@ -1,9 +1,9 @@
-package com.learning.be.business.dto;
-import java.util.ArrayList;
-import java.util.List;
+package com.learning.fe.controller.model;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -15,16 +15,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class FacultyDto extends BaseClassDto {
+public class TestDto extends BaseClassModel {
 
-	@Size(max = 100)
+	@Size(max = 50)
 	@NotEmpty
 	private String name;
 	
-	@NotNull
-	private UniversityDto university;
+	private CourseDto course;
 	
-	private List<UserDto> studentsAndProfessors = new ArrayList<>();
-
+	private Set<QuestionDto> questions = new HashSet<>();
 	
 }
