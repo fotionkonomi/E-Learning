@@ -35,7 +35,7 @@ public class UniversityController {
 	
 	@GetMapping("/add")
 	public String addPage(Model model) {
-		return "add";
+		return "add-university";
 	}
 	
 	@PostMapping("/add")
