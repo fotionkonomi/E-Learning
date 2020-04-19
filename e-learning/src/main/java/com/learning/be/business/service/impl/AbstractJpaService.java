@@ -1,5 +1,7 @@
 package com.learning.be.business.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
@@ -51,6 +53,11 @@ public abstract class AbstractJpaService<DTO extends BaseClassDto, ENTITY extend
 			throw new ConstraintException(e.getMessage(), e);
 		}
 	}
+	
+	@Override
+	public List<DTO> findAll() {
+		return mapEntityListToDTO(repo.findAll());
+	}
 
 	public ENTITY mapFromDTO(DTO dto) {
 		return modelMapper.map(dto, classOfEntity);
@@ -59,9 +66,17 @@ public abstract class AbstractJpaService<DTO extends BaseClassDto, ENTITY extend
 	public DTO mapFromEntity(ENTITY entity) {
 		return modelMapper.map(entity, classOfDto);
 	}
+	
+	
 
 	private Optional<DTO> mapOptionalEntityToDTO(Optional<ENTITY> optionalEntity) {
 		return Optional.ofNullable(optionalEntity.isPresent() ? mapFromEntity(optionalEntity.get()) : null);
 	}
 
+	private List<DTO> mapEntityListToDTO(List<ENTITY> entityList) {
+		List<DTO> dtoList = new ArrayList<>();
+		entityList.forEach(entity -> dtoList.add(mapFromEntity(entity)));
+		return dtoList;
+		
+	}
 }

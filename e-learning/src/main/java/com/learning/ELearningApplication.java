@@ -4,10 +4,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
+import org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType;
+import org.springframework.hateoas.support.WebStack;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
+@EnableHypermediaSupport(stacks = WebStack.WEBMVC, type = HypermediaType.HAL)
 public class ELearningApplication {
 
 	public static void main(String[] args) {
@@ -18,9 +22,4 @@ public class ELearningApplication {
 		return new ModelMapper();
 	}
 	
-	@Bean
-	public RestOperations rest() {
-		return new RestTemplate();
-	}
-
 }

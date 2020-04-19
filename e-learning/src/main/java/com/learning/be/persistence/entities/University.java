@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "university")
+@Table(name = "university", uniqueConstraints = { @UniqueConstraint(columnNames = {"name_university"}) })
 @Data
 @ToString( exclude = { "faculties" } ) 
 @EqualsAndHashCode(callSuper = true, exclude = { "faculties" })

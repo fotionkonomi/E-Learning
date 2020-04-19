@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }) })
+@Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "username", "email" }) })
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

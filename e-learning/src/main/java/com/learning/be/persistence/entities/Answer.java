@@ -31,7 +31,7 @@ public class Answer extends BaseClass {
 	@Column(name = "answer", nullable = false, columnDefinition = "TEXT", length = 65535)
 	private String answerOfQuestion;
 
-	@Column(name = "correct", nullable = false)
+	@Column(name = "correct")
 	private Boolean correct;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

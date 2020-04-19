@@ -6,9 +6,6 @@ import java.util.Set;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import com.learning.be.persistence.entities.User;
-import com.sun.istack.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,7 +21,6 @@ public class AnswerDto extends BaseClassDto {
 	@NotEmpty
 	private String answer;
 	
-	@NotNull
 	private Boolean correct;
 	
 	private QuestionDto question;
