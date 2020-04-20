@@ -1,45 +1,42 @@
 package com.learning.be.api.hateoas.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
-import com.learning.be.api.hateoas.assemblers.TestModelAssembler;
-import com.learning.be.api.hateoas.assemblers.UserModelAssembler;
-import com.learning.be.business.dto.CourseDto;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+@JsonRootName(value = "course")
+@Relation(collectionRelation = "courses")
+@JsonInclude(value = Include.NON_NULL)
 public class CourseModel extends RepresentationModel<CourseModel> {
 
-	@Getter
-	private final Long id;
+	private Long id;
 
-	@Getter
-	private final Date timestamp;
+	private Date timestamp;
+	
+	private String name;
 
-	@Getter
-	private final UserModel professor;
+	private UserModel professor;
 
-	@Getter
-	private final List<TestModel> tests;
+	private List<TestModel> tests;
 
-	@Getter
-	private final Set<UserModel> students;
+	private Set<UserModel> students;
 
-	public CourseModel(CourseDto course) {
-		this.id = course.getId();
-		this.timestamp = course.getTimestamp();
-		this.professor = new UserModelAssembler().toModel(course.getProfessor());
-		TestModelAssembler testModelAssembler = new TestModelAssembler();
-		tests = new ArrayList<>();
-		course.getTests().forEach(test -> tests.add(testModelAssembler.toModel(test)));
-		UserModelAssembler userModelAssembler = new UserModelAssembler();
-		students = new HashSet<>();
-		course.getStudents().forEach(student -> students.add(userModelAssembler.toModel(student)));
-	}
 }

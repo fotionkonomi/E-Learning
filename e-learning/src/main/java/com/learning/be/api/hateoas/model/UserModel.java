@@ -8,11 +8,10 @@ import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.learning.be.business.dto.RoleDto;
 import com.learning.be.business.dto.enums.GenderEnum;
-import com.learning.be.business.dto.enums.QuestionDifficulty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

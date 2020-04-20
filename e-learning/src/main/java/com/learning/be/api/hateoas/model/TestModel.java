@@ -1,41 +1,39 @@
 package com.learning.be.api.hateoas.model;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
-import com.learning.be.api.hateoas.assemblers.CourseModelAssembler;
-import com.learning.be.api.hateoas.assemblers.QuestionModelAssembler;
-import com.learning.be.business.dto.TestDto;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+@JsonRootName(value = "test")
+@Relation(collectionRelation = "tests")
+@JsonInclude(value = Include.NON_NULL)
 public class TestModel extends RepresentationModel<TestModel> {
 
-	@Getter
-	private final Long id;
+	private Long id;
 	
-	@Getter
-	private final Date timestamp;
+	private Date timestamp;
 	
-	@Getter
-	private final String name;
+	private String name;
 	
-	@Getter
-	private final CourseModel course;
+	private CourseModel course;
 	
-	@Getter
-	private final Set<QuestionModel> questions;
+	private Set<QuestionModel> questions;
 	
-	public TestModel(TestDto test) {
-		this.id = test.getId();
-		this.timestamp = test.getTimestamp();
-		this.name = test.getName();
-		this.course = new CourseModelAssembler().toModel(test.getCourse());
-		questions = new HashSet<>();
-		QuestionModelAssembler questionModelAssembler = new QuestionModelAssembler();
-		test.getQuestions().forEach(question -> questions.add(questionModelAssembler.toModel(question)));
-	}
 }

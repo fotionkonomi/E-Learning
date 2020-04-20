@@ -9,16 +9,25 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.learning.be.api.controller.AnswerRestController;
+import com.learning.be.api.controller.CourseRestController;
 import com.learning.be.api.controller.FacultyRestController;
 import com.learning.be.api.controller.QuestionRestController;
+import com.learning.be.api.controller.TestRestController;
 import com.learning.be.api.controller.UniversityRestController;
 import com.learning.be.api.controller.UserRestController;
+import com.learning.be.api.hateoas.model.AnswerModel;
+import com.learning.be.api.hateoas.model.CourseModel;
 import com.learning.be.api.hateoas.model.FacultyModel;
 import com.learning.be.api.hateoas.model.QuestionModel;
+import com.learning.be.api.hateoas.model.TestModel;
 import com.learning.be.api.hateoas.model.UniversityModel;
 import com.learning.be.api.hateoas.model.UserModel;
+import com.learning.be.business.dto.AnswerDto;
+import com.learning.be.business.dto.CourseDto;
 import com.learning.be.business.dto.FacultyDto;
 import com.learning.be.business.dto.QuestionDto;
+import com.learning.be.business.dto.TestDto;
 import com.learning.be.business.dto.UniversityDto;
 import com.learning.be.business.dto.UserDto;
 
@@ -46,20 +55,8 @@ public class AssemblerUtilImpl implements AssemblerUtil {
             return Collections.emptyList();
 		
 		return userDtos.stream()
-			.map(user -> UserModel.builder()
-					.id(user.getId())
-					.timestamp(user.getTimestamp())
-					.firstName(user.getFirstName())
-					.lastName(user.getLastName())
-					.username(user.getUsername())
-					.gender(user.getGender())
-					.email(user.getEmail())
-					.dateOfBirth(user.getDateOfBirth())
-					.dateRegistered(user.getDateRegistered())
-					.build()
-					.add(linkTo(methodOn(UserRestController.class)
-							.findOne(user.getId()))
-							.withSelfRel())).collect(Collectors.toList());
+			.map(this::toUserModel)
+			.collect(Collectors.toList());
 	}
 	
 	@Override
@@ -68,15 +65,8 @@ public class AssemblerUtilImpl implements AssemblerUtil {
             return Collections.emptyList();
 		
 		return faculties.stream()
-				.map(faculty -> FacultyModel.builder()
-					.id(faculty.getId())
-					.timestamp(faculty.getTimestamp())
-					.name(faculty.getName())
-					.build()
-					.add(linkTo(methodOn(FacultyRestController.class)
-							.findOne(faculty.getId()))
-							.withSelfRel())
-					).collect(Collectors.toList());
+				.map(this::toFacultyModel)
+				.collect(Collectors.toList());
 	}
 	
 	@Override
@@ -92,5 +82,102 @@ public class AssemblerUtilImpl implements AssemblerUtil {
 						withSelfRel());
 	}
 
+	@Override
+	public UserModel toUserModel(UserDto user) {
+		return UserModel.builder()
+				.id(user.getId())
+				.timestamp(user.getTimestamp())
+				.firstName(user.getFirstName())
+				.lastName(user.getLastName())
+				.username(user.getUsername())
+				.gender(user.getGender())
+				.email(user.getEmail())
+				.dateOfBirth(user.getDateOfBirth())
+				.dateRegistered(user.getDateRegistered())
+				.build()
+				.add(linkTo(methodOn(UserRestController.class)
+						.findOne(user.getId()))
+						.withSelfRel());
+	}
+
+	@Override
+	public Collection<TestModel> toCollectionTestModel(Collection<TestDto> tests) {
+		if(tests.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		return tests.stream()
+				.map(test -> TestModel.builder()
+					.id(test.getId())
+					.timestamp(test.getTimestamp())
+					.name(test.getName())
+					.build()
+					.add(linkTo(methodOn(TestRestController.class)
+							.findOne(test.getId()))
+							.withSelfRel()))
+				.collect(Collectors.toList());
+	}
 	
+	@Override
+	public Collection<AnswerModel> toCollectionAnswerModel(Collection<AnswerDto> answers) {
+		if(answers.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		return answers.stream()
+				.map(answer -> AnswerModel.builder()
+						.id(answer.getId())
+						.timestamp(answer.getTimestamp())
+						.answer(answer.getAnswer())
+						.correct(answer.getCorrect())
+						.build()
+						.add(linkTo(methodOn(AnswerRestController.class)
+								.findOne(answer.getId())).withSelfRel())
+						).collect(Collectors.toList());
+	}
+	
+	@Override
+	public CourseModel toCourseModel(CourseDto courseDto) {
+		return CourseModel.builder()
+				.id(courseDto.getId())
+				.timestamp(courseDto.getTimestamp())
+				.name(courseDto.getName())
+				.build()
+				.add(linkTo(methodOn(CourseRestController.class)
+						.findOne(courseDto.getId())).withSelfRel());
+	}
+	
+	@Override
+	public Collection<QuestionModel> toCollectionQuestionModels(Collection<QuestionDto> questionDtos) {
+		if(questionDtos.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		return questionDtos.stream()
+				.map(this::toQuestionModel)
+				.collect(Collectors.toList());
+	}
+	
+	@Override
+	public FacultyModel toFacultyModel(FacultyDto faculty) {
+		return FacultyModel.builder()
+				.id(faculty.getId())
+				.timestamp(faculty.getTimestamp())
+				.name(faculty.getName())
+				.build()
+				.add(linkTo(methodOn(FacultyRestController.class)
+						.findOne(faculty.getId()))
+						.withSelfRel());
+	}
+	
+	@Override
+	public Collection<CourseModel> toCollectionCourseModels(Collection<CourseDto> courseDtos) {
+		if(courseDtos.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		return courseDtos.stream()
+				.map(this::toCourseModel)
+				.collect(Collectors.toList());
+	}
 }
