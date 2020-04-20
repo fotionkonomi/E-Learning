@@ -1,5 +1,7 @@
 package com.learning.be.api.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learning.be.api.hateoas.assemblers.UniversityModelAssembler;
 import com.learning.be.api.hateoas.model.UniversityModel;
 import com.learning.be.business.dto.UniversityDto;
 import com.learning.be.business.service.UniversityService;
@@ -25,6 +28,10 @@ public class UniversityRestController {
 
 	@Autowired
 	private UniversityService universityService;
+
+	@Autowired
+	private UniversityModelAssembler universityModelAssembler;
+	
 
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<String> add(@RequestBody UniversityDto universityDto) {
@@ -49,12 +56,17 @@ public class UniversityRestController {
 //
 //		return ResponseEntity.status(HttpStatus.OK).body(universityModels);
 
-		return null;
+		List<UniversityDto> universities = universityService.findAll();
+		return new ResponseEntity<>(universityModelAssembler.toCollectionModel(universities), HttpStatus.OK);
+
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<UniversityModel> findOne(@PathVariable("id") Long id) {
-		return null;
+		return universityService.findById(id)
+				.map(universityModelAssembler::toModel)
+				.map(ResponseEntity::ok)
+				.orElse(ResponseEntity.notFound().build());
 	}
 
 }

@@ -9,11 +9,17 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.learning.be.api.controller.FacultyRestController;
 import com.learning.be.api.controller.QuestionRestController;
+import com.learning.be.api.controller.UniversityRestController;
 import com.learning.be.api.controller.UserRestController;
+import com.learning.be.api.hateoas.model.FacultyModel;
 import com.learning.be.api.hateoas.model.QuestionModel;
+import com.learning.be.api.hateoas.model.UniversityModel;
 import com.learning.be.api.hateoas.model.UserModel;
+import com.learning.be.business.dto.FacultyDto;
 import com.learning.be.business.dto.QuestionDto;
+import com.learning.be.business.dto.UniversityDto;
 import com.learning.be.business.dto.UserDto;
 
 @Service
@@ -54,6 +60,36 @@ public class AssemblerUtilImpl implements AssemblerUtil {
 					.add(linkTo(methodOn(UserRestController.class)
 							.findOne(user.getId()))
 							.withSelfRel())).collect(Collectors.toList());
+	}
+	
+	@Override
+	public Collection<FacultyModel> toCollectionFacultyModel(Collection<FacultyDto> faculties) {
+		if (faculties.isEmpty())
+            return Collections.emptyList();
+		
+		return faculties.stream()
+				.map(faculty -> FacultyModel.builder()
+					.id(faculty.getId())
+					.timestamp(faculty.getTimestamp())
+					.name(faculty.getName())
+					.build()
+					.add(linkTo(methodOn(FacultyRestController.class)
+							.findOne(faculty.getId()))
+							.withSelfRel())
+					).collect(Collectors.toList());
+	}
+	
+	@Override
+	public UniversityModel toUniversityModel(UniversityDto universityDto) {
+		return UniversityModel.builder()
+				.id(universityDto.getId())
+				.timestamp(universityDto.getTimestamp())
+				.name(universityDto.getName())
+				.address(universityDto.getAddress())
+				.build()
+				.add(linkTo(methodOn(UniversityRestController.class).
+						findOne(universityDto.getId())).
+						withSelfRel());
 	}
 
 	
