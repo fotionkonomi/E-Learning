@@ -24,49 +24,38 @@ import com.learning.be.common.exception.ConstraintException;
 @RestController
 @RequestMapping("/university")
 @CrossOrigin(origins = "*")
-public class UniversityRestController {
+public class UniversityRestController extends CrudAbstractRestController<UniversityDto, UniversityModel, Long> {
 
-	@Autowired
-	private UniversityService universityService;
-
-	@Autowired
-	private UniversityModelAssembler universityModelAssembler;
-	
-
-	@PostMapping(consumes = "application/json")
-	public ResponseEntity<String> add(@RequestBody UniversityDto universityDto) {
-		try {
-			universityService.save(universityDto);
-			return ResponseEntity.status(HttpStatus.CREATED).body(MessageConstants.MSG_SAVED_SUCCESSFULLY);
-		} catch (ConstraintException e) {
-			return ResponseEntity.badRequest().body(MessageConstants.MSG_CONSTRAINT_EXCEPTION);
-		}
-	}
-
-	@GetMapping
-	public ResponseEntity<CollectionModel<UniversityModel>> findAll() {
-//		List<UniversityDto> universityDtos = universityService.findAll();
+//	@Autowired
+//	private UniversityService universityService;
 //
-//		CollectionModel<UniversityModel> universityModels = new UniversityModelAssembler()
-//				.toCollectionModel(universityDtos);
-//		
-//		universityModels.add(
-//				 WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(UniversityRestController.class).findAllUniversities())
-//				 .withRel("universities"));
+//	@Autowired
+//	private UniversityModelAssembler universityModelAssembler;
+//	
 //
-//		return ResponseEntity.status(HttpStatus.OK).body(universityModels);
-
-		List<UniversityDto> universities = universityService.findAll();
-		return new ResponseEntity<>(universityModelAssembler.toCollectionModel(universities), HttpStatus.OK);
-
-	}
-
-	@GetMapping("/{id}")
-	public ResponseEntity<UniversityModel> findOne(@PathVariable("id") Long id) {
-		return universityService.findById(id)
-				.map(universityModelAssembler::toModel)
-				.map(ResponseEntity::ok)
-				.orElse(ResponseEntity.notFound().build());
-	}
+//	@PostMapping(consumes = "application/json")
+//	public ResponseEntity<String> add(@RequestBody UniversityDto universityDto) {
+//		try {
+//			universityService.save(universityDto);
+//			return ResponseEntity.status(HttpStatus.CREATED).body(MessageConstants.MSG_SAVED_SUCCESSFULLY);
+//		} catch (ConstraintException e) {
+//			return ResponseEntity.badRequest().body(MessageConstants.MSG_CONSTRAINT_EXCEPTION);
+//		}
+//	}
+//
+//	@GetMapping
+//	public ResponseEntity<CollectionModel<UniversityModel>> findAll() {
+//		List<UniversityDto> universities = universityService.findAll();
+//		return new ResponseEntity<>(universityModelAssembler.toCollectionModel(universities), HttpStatus.OK);
+//
+//	}
+//
+//	@GetMapping("/{id}")
+//	public ResponseEntity<UniversityModel> findOne(@PathVariable("id") Long id) {
+//		return universityService.findById(id)
+//				.map(universityModelAssembler::toModel)
+//				.map(ResponseEntity::ok)
+//				.orElse(ResponseEntity.notFound().build());
+//	}
 
 }

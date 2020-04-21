@@ -18,25 +18,25 @@ import com.learning.be.business.service.FacultyService;
 
 @RestController
 @RequestMapping("/faculty")
-public class FacultyRestController {
+public class FacultyRestController extends CrudAbstractRestController<FacultyDto, FacultyModel, Long> {
 
-	@Autowired
-	private FacultyService facultyService;
-
-	@Autowired
-	private FacultyModelAssembler facultyModelAssembler;
-
-	@GetMapping
-	public ResponseEntity<CollectionModel<FacultyModel>> findAll() {
-		List<FacultyDto> faculties = facultyService.findAll();
-		return new ResponseEntity<>(facultyModelAssembler.toCollectionModel(faculties), HttpStatus.OK);
-	}
-
-	@GetMapping("/{id}")
-	public ResponseEntity<FacultyModel> findOne(@PathVariable("id") Long id) {
-		return facultyService.findById(id)
-				.map(facultyModelAssembler::toModel)
-				.map(ResponseEntity::ok)
-				.orElse(ResponseEntity.notFound().build());
-	}
+//	@Autowired
+//	private FacultyService facultyService;
+//
+//	@Autowired
+//	private FacultyModelAssembler facultyModelAssembler;
+//
+//	@GetMapping
+//	public ResponseEntity<CollectionModel<FacultyModel>> findAll() {
+//		List<FacultyDto> faculties = facultyService.findAll();
+//		return new ResponseEntity<>(facultyModelAssembler.toCollectionModel(faculties), HttpStatus.OK);
+//	}
+//
+//	@GetMapping("/{id}")
+//	public ResponseEntity<FacultyModel> findOne(@PathVariable("id") Long id) {
+//		return facultyService.findById(id)
+//				.map(facultyModelAssembler::toModel)
+//				.map(ResponseEntity::ok)
+//				.orElse(ResponseEntity.notFound().build());
+//	}
 }
