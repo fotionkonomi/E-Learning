@@ -30,7 +30,7 @@ public class UserModelAssembler extends RepresentationModelAssemblerSupport<User
 	public UserModel toModel(UserDto entity) {
 		UserModel userModel = instantiateModel(entity);
 
-		userModel.add(linkTo(methodOn(UserRestController.class).findOne(entity.getId())).withSelfRel());
+		userModel.add(linkTo(methodOn(UserRestController.class, entity.getId()).findOne(entity.getId())).withSelfRel());
 
 		userModel.setId(entity.getId());
 		userModel.setTimestamp(entity.getTimestamp());

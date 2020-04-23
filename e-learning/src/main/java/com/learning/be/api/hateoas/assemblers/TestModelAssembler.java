@@ -29,7 +29,7 @@ public class TestModelAssembler extends RepresentationModelAssemblerSupport<Test
 	public TestModel toModel(TestDto entity) {
 		TestModel testModel = instantiateModel(entity);
 
-		testModel.add(linkTo(methodOn(TestRestController.class).findOne(entity.getId())).withSelfRel());
+		testModel.add(linkTo(methodOn(TestRestController.class, entity.getId()).findOne(entity.getId())).withSelfRel());
 
 		testModel.setId(entity.getId());
 		testModel.setTimestamp(entity.getTimestamp());

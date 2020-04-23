@@ -29,7 +29,7 @@ public class QuestionModelAssembler extends RepresentationModelAssemblerSupport<
 	public QuestionModel toModel(QuestionDto entity) {
 		QuestionModel questionModel = instantiateModel(entity);
 
-		questionModel.add(linkTo(methodOn(QuestionRestController.class).findOne(entity.getId())).withSelfRel());
+		questionModel.add(linkTo(methodOn(QuestionRestController.class, entity.getId()).findOne(entity.getId())).withSelfRel());
 
 		questionModel.setId(entity.getId());
 		questionModel.setTimestamp(entity.getTimestamp());

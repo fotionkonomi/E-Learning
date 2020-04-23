@@ -30,7 +30,7 @@ public class CourseModelAssembler extends RepresentationModelAssemblerSupport<Co
 	public CourseModel toModel(CourseDto entity) {
 		CourseModel courseModel = instantiateModel(entity);
 
-		courseModel.add(linkTo(methodOn(CourseRestController.class).findOne(entity.getId())).withSelfRel());
+		courseModel.add(linkTo(methodOn(CourseRestController.class, entity.getId()).findOne(entity.getId())).withSelfRel());
 
 		courseModel.setId(entity.getId());
 		courseModel.setTimestamp(entity.getTimestamp());

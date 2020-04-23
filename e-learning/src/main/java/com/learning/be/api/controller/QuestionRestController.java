@@ -8,18 +8,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learning.be.api.hateoas.model.QuestionModel;
+import com.learning.be.business.dto.QuestionDto;
 
 @RestController
 @RequestMapping("/question")
-public class QuestionRestController {
+public class QuestionRestController extends CrudAbstractRestController<QuestionDto, QuestionModel, Long> {
 
+	@Override
 	@GetMapping
 	public ResponseEntity<CollectionModel<QuestionModel>> findAll() {
-		return null;
+		return super.findAll();
 	}
-	
+
+	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<QuestionModel> findOne(@PathVariable("id") Long id) {
-		return null;
+		return super.findOne(id);
 	}
 }

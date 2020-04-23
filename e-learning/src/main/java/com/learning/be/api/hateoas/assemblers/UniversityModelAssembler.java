@@ -28,7 +28,7 @@ public class UniversityModelAssembler extends RepresentationModelAssemblerSuppor
 	@Override
 	public UniversityModel toModel(UniversityDto entity) {
 		UniversityModel universityModel = instantiateModel(entity);
-		universityModel.add(linkTo(methodOn(UniversityRestController.class).findOne(entity.getId())).withSelfRel());
+		universityModel.add(linkTo(methodOn(UniversityRestController.class, entity.getId()).findOne(entity.getId())).withSelfRel());
 		universityModel.setId(entity.getId());
 		universityModel.setTimestamp(entity.getTimestamp());
 		universityModel.setName(entity.getName());

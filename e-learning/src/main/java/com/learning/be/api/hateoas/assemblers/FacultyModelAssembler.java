@@ -29,7 +29,7 @@ public class FacultyModelAssembler extends RepresentationModelAssemblerSupport<F
 	public FacultyModel toModel(FacultyDto entity) {
 		FacultyModel facultyModel = instantiateModel(entity);
 
-		facultyModel.add(linkTo(methodOn(FacultyRestController.class).findOne(entity.getId())).withSelfRel());
+		facultyModel.add(linkTo(methodOn(FacultyRestController.class, entity.getId()).findOne(entity.getId())).withSelfRel());
 
 		facultyModel.setId(entity.getId());
 		facultyModel.setTimestamp(entity.getTimestamp());

@@ -29,7 +29,7 @@ public class AnswerModelAssembler extends RepresentationModelAssemblerSupport<An
 	public AnswerModel toModel(AnswerDto entity) {
 		AnswerModel answerModel = instantiateModel(entity);
 
-		answerModel.add(linkTo(methodOn(AnswerRestController.class).findOne(entity.getId())).withSelfRel());
+		answerModel.add(linkTo(methodOn(AnswerRestController.class, entity.getId()).findOne(entity.getId())).withSelfRel());
 
 		answerModel.setId(entity.getId());
 		answerModel.setTimestamp(entity.getTimestamp());

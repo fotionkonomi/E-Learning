@@ -43,7 +43,7 @@ public class AssemblerUtilImpl implements AssemblerUtil {
 			.difficulty(questionDto.getDifficulty())
 			.numberOfPoints(questionDto.getNumberOfPoints())
 				.build()
-				.add(linkTo(methodOn(QuestionRestController.class)
+				.add(linkTo(methodOn(QuestionRestController.class, questionDto.getId())
 						.findOne(questionDto.getId()))
 						.withSelfRel());
 					
@@ -77,7 +77,7 @@ public class AssemblerUtilImpl implements AssemblerUtil {
 				.name(universityDto.getName())
 				.address(universityDto.getAddress())
 				.build()
-				.add(linkTo(methodOn(UniversityRestController.class).
+				.add(linkTo(methodOn(UniversityRestController.class, universityDto.getId()).
 						findOne(universityDto.getId())).
 						withSelfRel());
 	}
@@ -95,7 +95,7 @@ public class AssemblerUtilImpl implements AssemblerUtil {
 				.dateOfBirth(user.getDateOfBirth())
 				.dateRegistered(user.getDateRegistered())
 				.build()
-				.add(linkTo(methodOn(UserRestController.class)
+				.add(linkTo(methodOn(UserRestController.class, user.getId())
 						.findOne(user.getId()))
 						.withSelfRel());
 	}
@@ -112,7 +112,7 @@ public class AssemblerUtilImpl implements AssemblerUtil {
 					.timestamp(test.getTimestamp())
 					.name(test.getName())
 					.build()
-					.add(linkTo(methodOn(TestRestController.class)
+					.add(linkTo(methodOn(TestRestController.class, test.getId())
 							.findOne(test.getId()))
 							.withSelfRel()))
 				.collect(Collectors.toList());
@@ -131,7 +131,7 @@ public class AssemblerUtilImpl implements AssemblerUtil {
 						.answer(answer.getAnswer())
 						.correct(answer.getCorrect())
 						.build()
-						.add(linkTo(methodOn(AnswerRestController.class)
+						.add(linkTo(methodOn(AnswerRestController.class, answer.getId())
 								.findOne(answer.getId())).withSelfRel())
 						).collect(Collectors.toList());
 	}
@@ -143,7 +143,7 @@ public class AssemblerUtilImpl implements AssemblerUtil {
 				.timestamp(courseDto.getTimestamp())
 				.name(courseDto.getName())
 				.build()
-				.add(linkTo(methodOn(CourseRestController.class)
+				.add(linkTo(methodOn(CourseRestController.class, courseDto.getId())
 						.findOne(courseDto.getId())).withSelfRel());
 	}
 	
@@ -165,7 +165,7 @@ public class AssemblerUtilImpl implements AssemblerUtil {
 				.timestamp(faculty.getTimestamp())
 				.name(faculty.getName())
 				.build()
-				.add(linkTo(methodOn(FacultyRestController.class)
+				.add(linkTo(methodOn(FacultyRestController.class, faculty.getId())
 						.findOne(faculty.getId()))
 						.withSelfRel());
 	}
