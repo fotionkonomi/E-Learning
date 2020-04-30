@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType;
 import org.springframework.hateoas.support.WebStack;
-import org.springframework.web.client.RestOperations;
-import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableHypermediaSupport(stacks = WebStack.WEBMVC, type = HypermediaType.HAL)

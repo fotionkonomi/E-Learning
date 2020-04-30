@@ -9,7 +9,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.learning.be.business.dto.enums.QuestionDifficulty;
-import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
