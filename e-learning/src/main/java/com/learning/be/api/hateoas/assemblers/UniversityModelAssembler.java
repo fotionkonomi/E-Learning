@@ -41,7 +41,7 @@ public class UniversityModelAssembler extends RepresentationModelAssemblerSuppor
 	public CollectionModel<UniversityModel> toCollectionModel(Iterable<? extends UniversityDto> entities) {
 		CollectionModel<UniversityModel> universityModels = super.toCollectionModel(entities);
 
-		universityModels.add(linkTo(methodOn(UniversityRestController.class).findAll()).withSelfRel());
+		universityModels.add(linkTo(methodOn(UniversityRestController.class).findAll()).withRel("universities"));
 
 		return universityModels;
 	}

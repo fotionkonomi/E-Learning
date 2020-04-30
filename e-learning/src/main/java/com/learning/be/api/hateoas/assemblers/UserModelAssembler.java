@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.learning.be.api.controller.UserRestController;
 import com.learning.be.api.hateoas.assemblers.util.AssemblerUtil;
 import com.learning.be.api.hateoas.model.UserModel;
+import com.learning.be.business.dto.RoleDto;
 import com.learning.be.business.dto.UserDto;
 
 @Component
@@ -42,7 +43,9 @@ public class UserModelAssembler extends RepresentationModelAssemblerSupport<User
 		userModel.setDateOfBirth(entity.getDateOfBirth());
 		userModel.setDateRegistered(entity.getDateRegistered());
 		userModel.setFaculty(assemblerUtil.toFacultyModel(entity.getFaculty()));
-		userModel.setRole(entity.getRole());
+		RoleDto role = entity.getRole();
+		role.setUsers(null);
+		userModel.setRole(role);
 		userModel.setMyStudentCourses(
 				new HashSet<>(assemblerUtil.toCollectionCourseModels(entity.getMyStudentCourses())));
 		userModel.setMyProfessorCourses(
