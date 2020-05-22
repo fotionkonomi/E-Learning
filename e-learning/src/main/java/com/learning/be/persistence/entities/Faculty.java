@@ -31,7 +31,7 @@ public class Faculty extends BaseClass {
 	@Column(name = "name_faculty", nullable = false, length = 100)
 	private String name;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "university_id", referencedColumnName = "id")
 	private University university;
 
