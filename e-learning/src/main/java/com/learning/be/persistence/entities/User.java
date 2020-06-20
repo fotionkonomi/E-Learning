@@ -69,8 +69,8 @@ public class User extends BaseClass {
 //	private Date dateEdited;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "faculty_id")
-	private Faculty faculty;
+	@JoinColumn(name = "branch_id")
+	private Branch branch;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "role_id")

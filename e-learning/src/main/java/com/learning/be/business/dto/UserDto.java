@@ -51,7 +51,7 @@ public class UserDto extends BaseClassDto {
 	
 	private Date dateRegistered;
 	
-	private FacultyDto faculty;
+	private BranchDto branch;
 	
 	private RoleDto role;
 	

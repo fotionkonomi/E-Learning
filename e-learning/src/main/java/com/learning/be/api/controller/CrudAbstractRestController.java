@@ -35,7 +35,6 @@ public abstract class CrudAbstractRestController<DTO extends BaseClassDto, ID> {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<DTO> findOne(@PathVariable("id") ID id) {
-		log.info("Thirrja erdhi");
 		return service.findById(id)
 				.map(ResponseEntity::ok)
 				.orElse(ResponseEntity.notFound().build());

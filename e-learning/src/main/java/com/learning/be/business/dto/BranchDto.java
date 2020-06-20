@@ -1,4 +1,5 @@
 package com.learning.be.business.dto;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +20,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class FacultyDto extends BaseClassDto {
-
+public class BranchDto extends BaseClassDto {
+	
 	@Size(max = 100)
 	@NotEmpty
 	private String name;
 	
 	@NotNull
-	private UniversityDto university;
+	private FacultyDto faculty;
 	
-	private List<BranchDto> branches = new ArrayList<>();
+	private List<UserDto> students = new ArrayList<>();
 
-	
 }

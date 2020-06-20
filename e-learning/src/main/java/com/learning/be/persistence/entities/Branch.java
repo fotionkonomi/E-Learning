@@ -20,22 +20,22 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "faculty", uniqueConstraints = { @UniqueConstraint(columnNames = { "name_faculty", "university_id" }) })
+@Table(name = "branch", uniqueConstraints = { @UniqueConstraint(columnNames = { "name_branch", "faculty_id" }) })
 @Data
-@ToString(exclude = { "branches" })
+@ToString(exclude = { "students" })
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true, exclude = { "branches" })
-public class Faculty extends BaseClass {
+@EqualsAndHashCode(callSuper = true, exclude = { "students" })
+public class Branch extends BaseClass {
 
-	@Column(name = "name_faculty", nullable = false, length = 100)
+	@Column(name = "name_branch", nullable = false, length = 100)
 	private String name;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "university_id", referencedColumnName = "id")
-	private University university;
-	
-	@OneToMany(mappedBy = "faculty")
-	private List<Branch> branches = new ArrayList<>();
+	@JoinColumn(name = "faculty_id", referencedColumnName = "id")
+	private Faculty faculty;
+
+	@OneToMany(mappedBy = "branch")
+	private List<User> students = new ArrayList<>();
 
 }

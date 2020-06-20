@@ -73,7 +73,7 @@ public abstract class AbstractJpaService<DTO extends BaseClassDto, ENTITY extend
 		return Optional.ofNullable(optionalEntity.isPresent() ? mapFromEntity(optionalEntity.get()) : null);
 	}
 
-	private List<DTO> mapEntityListToDTO(List<ENTITY> entityList) {
+	protected List<DTO> mapEntityListToDTO(List<ENTITY> entityList) {
 		List<DTO> dtoList = new ArrayList<>();
 		entityList.forEach(entity -> dtoList.add(mapFromEntity(entity)));
 		return dtoList;
