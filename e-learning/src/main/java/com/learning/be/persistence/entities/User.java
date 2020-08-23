@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -63,17 +64,13 @@ public class User extends BaseClass {
 	@Column(name = "date_registered", nullable = false, columnDefinition = "DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateRegistered;
-	
-//	@Column(name = "date_edited", nullable = false, columnDefinition = "DATETIME")
-//	@Temporal(TemporalType.TIMESTAMP)
-//	private Date dateEdited;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "branch_id")
 	private Branch branch;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "role_id")
+	@JoinColumn(name = "role_id", nullable = false)
 	private Role role;
 	
 	@ManyToMany(mappedBy = "students")
@@ -84,4 +81,9 @@ public class User extends BaseClass {
 
 	@ManyToMany(mappedBy = "usersThatChoseThisAnswer")
 	private Set<Answer> myAnswers = new HashSet<>();
+	
+	@PrePersist
+	void dateRegistered() {
+		this.dateRegistered = new Date();
+	}
 }

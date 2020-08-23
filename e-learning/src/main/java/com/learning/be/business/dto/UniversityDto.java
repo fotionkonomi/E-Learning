@@ -6,8 +6,7 @@ import java.util.List;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +17,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = UniversityDto.class)
 public class UniversityDto extends BaseClassDto {
 
 	@Size(max = 100)
@@ -29,5 +27,6 @@ public class UniversityDto extends BaseClassDto {
 	@NotEmpty
 	private String address;
 	
+	@JsonManagedReference
 	private List<FacultyDto> faculties = new ArrayList<>();
 }

@@ -7,8 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +18,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = BranchDto.class)
 public class BranchDto extends BaseClassDto {
 	
 	@Size(max = 100)
@@ -27,7 +25,9 @@ public class BranchDto extends BaseClassDto {
 	private String name;
 	
 	@NotNull
+	@JsonBackReference
 	private FacultyDto faculty;
+	
 	
 	private List<UserDto> students = new ArrayList<>();
 

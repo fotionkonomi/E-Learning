@@ -6,8 +6,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +20,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true, exclude = { "branches" })
 @ToString(exclude = { "branches" })
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = FacultyDto.class)
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = FacultyDto.class)
 public class FacultyDto extends BaseClassDto {
 
 	@Size(max = 100)
@@ -28,8 +28,10 @@ public class FacultyDto extends BaseClassDto {
 	private String name;
 	
 	@NotNull
+	@JsonBackReference
 	private UniversityDto university;
 	
+	@JsonManagedReference
 	private List<BranchDto> branches = new ArrayList<>();
 
 	
