@@ -9,4 +9,5 @@ import com.learning.be.business.dto.UserDto;
 @RequestMapping("/user")
 public class UserRestController extends CrudAbstractRestController<UserDto, Long> {
 
+
 }

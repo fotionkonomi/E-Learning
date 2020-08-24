@@ -1,14 +1,17 @@
 package com.learning.be.business.dto;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.learning.be.business.dto.enums.GenderEnum;
 
@@ -21,7 +24,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class UserDto extends BaseClassDto {
+public class UserDto extends BaseClassDto implements UserDetails {
+
+	private static final long serialVersionUID = -6200896515769546024L;
 
 	@Size(max = 50)
 	@NotEmpty
@@ -59,4 +64,29 @@ public class UserDto extends BaseClassDto {
 	private List<CourseDto> myProfessorCourses = new ArrayList<>();
 
 	private Set<AnswerDto> myAnswers = new HashSet<>();
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }
