@@ -38,7 +38,7 @@ public class Course extends BaseClass {
 	private List<Test> tests = new ArrayList<>();
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "professor_id", referencedColumnName = "id")
+	@JoinColumn(name = "professor_id", referencedColumnName = "id", nullable = false)
 	private User professor;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })

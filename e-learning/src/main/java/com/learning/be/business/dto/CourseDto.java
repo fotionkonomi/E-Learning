@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -27,6 +28,7 @@ public class CourseDto extends BaseClassDto {
 	@NotEmpty
 	private String name;
 	
+	@NotNull
 	private UserDto professor;
 	
 	private List<TestDto> tests = new ArrayList<>();
