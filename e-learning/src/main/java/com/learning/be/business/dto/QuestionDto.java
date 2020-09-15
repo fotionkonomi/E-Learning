@@ -1,9 +1,7 @@
 package com.learning.be.business.dto;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -34,7 +32,9 @@ public class QuestionDto extends BaseClassDto {
 	
 	private Long numberOfPoints;
 	
+	private TestDto test;
+	
 	private List<AnswerDto> answers = new ArrayList<>();
 
-	private Set<TestDto> tests = new HashSet<>();
+	
 }

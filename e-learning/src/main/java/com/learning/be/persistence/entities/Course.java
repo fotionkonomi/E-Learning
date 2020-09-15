@@ -25,7 +25,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "course")
 @Data
-@ToString( exclude = { "tests", "students" } )
+@ToString(exclude = { "tests", "students" })
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true, exclude = { "tests", "students" })
@@ -33,15 +33,15 @@ public class Course extends BaseClass {
 
 	@Column(name = "name_course", nullable = false, length = 100)
 	private String name;
-	
+
 	@OneToMany(mappedBy = "course")
 	private List<Test> tests = new ArrayList<>();
-	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "professor_id", referencedColumnName = "id", nullable = false)
 	private User professor;
-	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
 	@JoinTable(name = "course_student", joinColumns = { @JoinColumn(name = "id_course") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_student") })
 	private Set<User> students = new HashSet<>();

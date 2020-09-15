@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.learning.be.business.dto.enums.GenderEnum;
 
 import lombok.AllArgsConstructor;
@@ -61,6 +62,7 @@ public class UserDto extends BaseClassDto implements UserDetails {
 	
 	private Set<CourseDto> myStudentCourses = new HashSet<>();
 	
+	@JsonManagedReference
 	private List<CourseDto> myProfessorCourses = new ArrayList<>();
 
 	private Set<AnswerDto> myAnswers = new HashSet<>();

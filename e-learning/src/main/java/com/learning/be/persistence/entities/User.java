@@ -70,7 +70,7 @@ public class User extends BaseClass {
 	private Branch branch;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "role_id", nullable = false)
+	@JoinColumn(name = "role_id")
 	private Role role;
 	
 	@ManyToMany(mappedBy = "students")

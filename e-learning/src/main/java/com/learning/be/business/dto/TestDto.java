@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -25,6 +26,7 @@ public class TestDto extends BaseClassDto {
 	@NotEmpty
 	private String name;
 
+	@JsonBackReference
 	private CourseDto course;
 	
 	private Set<QuestionDto> questions = new HashSet<>();

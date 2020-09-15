@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public abstract class CrudAbstractRestController<DTO extends BaseClassDto, ID> {
 
 	@Autowired
-	private BaseService<DTO, ID> service;
+	protected BaseService<DTO, ID> service;
 	
 	@GetMapping
 	public ResponseEntity<Collection<DTO>> findAll() {

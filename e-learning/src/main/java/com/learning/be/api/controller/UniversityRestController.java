@@ -8,5 +8,5 @@ import com.learning.be.business.dto.UniversityDto;
 @RestController
 @RequestMapping("/university")
 public class UniversityRestController extends CrudAbstractRestController<UniversityDto, Long> {
-
+	
 }
