@@ -30,7 +30,7 @@ public class Test extends BaseClass {
 	@Column(name = "name_test", nullable = false, length = 50)
 	private String name;
 
-	@OneToMany(mappedBy = "test")
+	@OneToMany(mappedBy = "test", cascade = CascadeType.ALL)
 	private List<Question> questions = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)

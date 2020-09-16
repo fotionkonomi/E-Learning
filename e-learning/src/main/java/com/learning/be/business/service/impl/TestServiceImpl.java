@@ -12,5 +12,11 @@ public class TestServiceImpl extends AbstractJpaService<TestDto, Test, Long> imp
 	public TestServiceImpl() {
 		super(Test.class, TestDto.class);
 	}
+	
+	@Override
+	public TestDto save(TestDto dto) {
+		dto.getQuestions().forEach(question -> question.setTest(dto));
+		return super.save(dto);
+	}
 
 }

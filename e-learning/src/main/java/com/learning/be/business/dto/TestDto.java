@@ -1,6 +1,8 @@
 package com.learning.be.business.dto;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
@@ -29,6 +31,6 @@ public class TestDto extends BaseClassDto {
 	@JsonBackReference
 	private CourseDto course;
 	
-	private Set<QuestionDto> questions = new HashSet<>();
+	private List<QuestionDto> questions = new ArrayList<>();
 	
 }
