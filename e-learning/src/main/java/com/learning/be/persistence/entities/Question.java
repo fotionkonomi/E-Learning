@@ -37,11 +37,8 @@ public class Question extends BaseClass {
 	@Enumerated(EnumType.ORDINAL)
 	private QuestionDifficulty difficulty;
 	
-	@OneToMany(mappedBy = "question")
+	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
 	private List<Answer> answers = new ArrayList<>();
-	
-	@Column(name = "correct")
-	private Boolean correct;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "test_id", referencedColumnName = "id")

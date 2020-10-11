@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -27,6 +28,7 @@ public class AnswerDto extends BaseClassDto {
 	
 	private Boolean correct;
 	
+	@JsonBackReference
 	private QuestionDto question;
 	
 	private Set<UserDto> usersThatChoseThisAnswer = new HashSet<>();
